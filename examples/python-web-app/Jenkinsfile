@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
-                cd Docker-Zero-to-Hero/examples/python-web-app/Dockerfile      
+                cd examples/python-web-app      
                 docker build -t $IMAGE_NAME:latest .
                 '''
             }
