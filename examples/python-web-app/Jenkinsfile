@@ -21,7 +21,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: '9fed644f-67fe-4254-9d19-9b79f5ba7bc1',
+                    credentialsId: '90953881-2dd3-43df-9817-f8efa9bff69b',
                     usernameVariable: 'USER',
                     passwordVariable: 'PASS'
                 )]) {
