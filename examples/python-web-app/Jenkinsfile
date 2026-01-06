@@ -38,6 +38,9 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
+            environment {
+                KUBECONFIG = "/var/lib/jenkins/.kube/config"
+            }
             steps {
                 sh '''
                 cd examples/python-web-app
