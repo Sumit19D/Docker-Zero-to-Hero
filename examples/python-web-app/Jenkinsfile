@@ -1,16 +1,20 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "sumitdorugade/cicd-app"
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
-                checkout scm
+                git 'https://github.com/Sumit19D/Docker-Zero-to-Hero.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t sumitdorugade/cicd-app:latest .'
+                sh 'docker build -t $IMAGE_NAME:latest .'
             }
         }
 
@@ -18,12 +22,12 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'sumitdorugade',
-                    passwordVariable: 'RAnsandy#2025'
+                    usernameVariable: 'USER',
+                    passwordVariable: 'PASS'
                 )]) {
                     sh '''
                     echo $PASS | docker login -u $USER --password-stdin
-                    docker push sumitdorugade/cicd-app:latest
+                    docker push $IMAGE_NAME:latest
                     '''
                 }
             }
@@ -39,3 +43,4 @@ pipeline {
         }
     }
 }
+
